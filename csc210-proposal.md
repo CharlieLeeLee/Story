@@ -1,6 +1,6 @@
 ###CSC 210
 #Project Milestone 1: Project Proposal
-###Group Members: [Charlie Norvell] (anorvell@u.rochester.edu) [Lucinda Liu] (yliu114@u.rochester.edu)
+###Group Members: [Charlie Norvell] (mailto:anorvell@u.rochester.edu) [Lucinda Liu] (mailto:yliu114@u.rochester.edu)
 
 ##Story
 Our Web Application’s name is Story. This name is based on what our main usage of this web will be: the collaborative creation of stories.
