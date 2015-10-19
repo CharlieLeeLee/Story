@@ -7,7 +7,7 @@ Our Web Application’s name is Story. This name is based on what our main usage
 
 ##Target Audience
 The target audience for this web is people who want to show their talent in writing stories, who want to construct a story with other writers, who want to share 
-story ideas to see them unfold into a , and who just have interest in writing. 
+story ideas to see them unfold into a full novel or screenplay, and who just have interest in writing. 
 
 ##The Problem
 So, what will Story do for this audience? Our web appwill have two main parts. First, each user can create an account and, using that account, 
