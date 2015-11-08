@@ -35,7 +35,7 @@ print # don't forget the extra newline
 print '<html>'
 print ' <head>'
 print '		<title>'
-print '			Sign In Error'
+print '			Logging In...'
 print '		</title>'
 print '		<style type="text/css">'
 # in Python, use ''' triple quotes ''' to create a multi-line string
@@ -69,6 +69,7 @@ print '<h1>Logging In...</h1>'
 
 # print out the data for all users in the database
 notfound = True
+badpass = False
 for r in c.execute('select * from accounts;'):
         if (r[0] == aname):
             notfound = False
@@ -76,12 +77,13 @@ for r in c.execute('select * from accounts;'):
                 print '<meta http-equiv="refresh"'
                 print ' content="0; url=profile.py?aname='+aname+'">'
             else:
+                badpass = True
                 print '<h2> Incorrect Password</h2>'
-                print '<a href="../SignIn.html">Try Again</a>'
+                print '<h2><a href="../SignIn.html">Try Again</a></h2>'
 if (notfound):
     print '<h2>User '+aname+' does not exist.</h2>'
     print '<h2><a href="../CreatAccount.html">Create New Account</a></h2>'
-else:
+elif (badpass == False):
     print '<h2>Redirecting...</h2>'
 conn.close()
 
