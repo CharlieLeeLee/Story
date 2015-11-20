@@ -57,6 +57,10 @@ print '''
                                 font-size: 20px;
                                 font-family: arial;
                                 color: #337AB7;
+                        }
+                        body {
+                            font-family: arial;
+                        }
 		</style>
 
 	</head>
@@ -70,6 +74,7 @@ for r in c.execute('select * from accounts;'):
         print '<h2>Name: '+r[1]+' '+r[2]+'</h2>'
         print '<h2>Talent: '+r[5]+'</h2>'
         print '<img src="'+r[4]+'"/>'
+print '<p><a href="home.py">Back to Story</a></p>'
 print '<hr><h3>Other Users:</h3>'
 
 # print out the data for all users in the database

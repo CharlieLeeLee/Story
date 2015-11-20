@@ -9,31 +9,7 @@ import cgitb
 cgitb.enable()
 
 def notLoggedInPage():
-        import cgi
-        form = cgi.FieldStorage()
-        aname = form['accountname'].value
-        pw = form['password'].value
-
-        import datetime
-        t = str(datetime.datetime.now() + datetime.timedelta(day=1))
-        cookie = Cookie.SimpleCookie()
-        import sqlite3
-
-        conn = sqlite3.connect('accounts.db')
-        c = conn.cursor()
-        for r in c.execute('select * from accounts where aname=?;', [aname]):
-                if r[3] == pw:
-                        cookie['username'] = aname
-                        cookie['username']['expires'] = t.strftime('%a, %d %b %Y %H:%M:%S')
-                        print "Content-type: text/html"
-                        print cookie
-                        print
-                else:
-                        print "Content-type: text/html"
-                        print
-                        print '<p>Incorrect password</p>'
-        conn.close()
-        
+            
         print '<html>'
         print ' <head>'
         print '		<title>'
@@ -68,15 +44,16 @@ def notLoggedInPage():
         '''
         print '<body>'
         print'<p>You are not yet logged in.</p>'
-        print'<form method="post" action="login.py">'
+        print'<form method="post" action="passCheck.py">'
         print'Username:'
-        print'<input uname="username" type=text size="3-"/>'
+        print'<input name="username" type=text size="30"/>'
+        print'<br><br>'
         print'Password:'
-        print'<input pass="password" type=text size="50"/>'
+        print'<input name="password" type=text size="30"/>'
         print'<input type="submit"/>'
         print'</form>'
         print'</body></html>'
-
+        
 def loggedInPage(username):
         print '<html>'
         print ' <head>'
