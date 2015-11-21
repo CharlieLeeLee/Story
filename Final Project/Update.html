@@ -1,0 +1,91 @@
+<html>
+
+<head>
+<title>Update</title>
+
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // console.log("Hello world!");
+	$("#changeButton").click(function() {
+		var fname = $("#firstname").val();
+		var lname = $("#lastname").val();
+		var talent = $("#writingtalent").val();
+		var pic = $("#profile").val();
+	
+		// From: http://learn.jquery.com/ajax/jquery-ajax-methods/
+		// Using the core $.ajax() method
+		$.ajax({
+			// The URL for the request
+			url: "cgi-bin/updateaccount.py",
+			// The data to send (will be converted to a query string)
+			data: {
+				first_name: fname,
+				last_name: lname,
+				writing_talent: talent,
+				profile: pic
+			},
+			// Whether this is a POST or GET request
+			type: "GET",
+			// The type of data we expect back
+			//dataType : "text",
+			dataType : "json",
+			// Code to run if the request succeeds;
+			// the response is passed to the function
+			success: function( data ) {
+				console.log("You received some data!");
+				console.log(data);
+
+				$("#nameDiv").html(data.myName);
+				$("#talentDiv").html(data.myTalent);
+				$("#image").attr("src", data.myImage);
+			},
+			// Code to run if the request fails
+			error: function() {
+		 		alert( "Sorry, there was a problem!" );
+			},
+		});
+	});
+});
+</script>
+
+</head>
+	<body>
+		<h1>Story Profile Change</h1>
+
+		First Name:
+		<input id="firstname" type="text" size = "50">
+		<br>
+		<br>
+
+		Last Name:
+		<input id="lastname" type="text" size = "50">
+		<br>
+		<br>
+
+		Writing Talent:
+		<select id = "writingtalent">
+			<option value="novel">Novel</option>
+			<option value="screenplay">Screen Play</option>
+			<option value="theatre">Theatre</option>
+			<option value="poem">Poem</option>
+		</select>
+		<br>
+		<br>
+
+		Profile picture:
+		<input id="profile" type="text" size = "50">
+		<br>
+		<br>
+
+	  <button id="changeButton">Change</button>
+
+		<div id="nameDiv"> Your Name </div>
+		<div id="talentDiv"> Your Writing Talent </div>
+		<img id="image">
+		
+
+
+	</body>
+</html>

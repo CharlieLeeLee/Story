@@ -37,7 +37,7 @@ def printstyle():
                     </style>
 
             </head>
-        
+
     '''
 
 import cgi
@@ -47,18 +47,23 @@ pw = form['password'].value
 
 import datetime
 from datetime import timedelta
+
 import Cookie
 import os
-t = str(datetime.datetime.now() + datetime.timedelta(days=1))
-cookie = Cookie.SimpleCookie()
+#set up for 1 day to make the cookie expire
+#t = str(datetime.datetime.now() + datetime.timedelta(days=1))
+#t = str(datetime.datetime.now() + datetime.timedelta(days=1))
+expires = datetime.datetime.utcnow() + datetime.timedelta(days=30) # expires in 30 days
 import sqlite3
 
 conn = sqlite3.connect('accounts.db')
 c = conn.cursor()
 for r in c.execute('select * from accounts where aname=?;',[aname]):
     if r[3] == pw:
+        cookie = Cookie.SimpleCookie()
         cookie['username'] = aname
-        cookie['username']['expires'] = t
+        cookie['username']['expires'] = expires.strftime("%a, %d %b %Y %H:%M:%S GMT")
+
         print "Content-type: text/html"
         print cookie
         print
@@ -76,17 +81,19 @@ for r in c.execute('select * from accounts where aname=?;',[aname]):
         print '</body>'
         print '</html>'
         conn.close()
-        
+
     else:
         print "Content-type: text/html"
         print
         printstyle()
         print '<body>'
         print '<p>Incorrect password</p>'
+        print '<A HREF = "CreatAccount.html" class="button">Register New</A>'
+        print '<A HREF = "login.py" class="button">Try again</A>'
         print '</body>'
         print '</html>'
         conn.close()
-    
+
 conn.close()
 print "Content-type: text/html"
 print

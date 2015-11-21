@@ -34,9 +34,22 @@ c = conn.cursor()
 c.execute('insert into accounts values (?, ?, ?, ?, ?, ?)', (aname, fname, lname, pw, image, writing))
 conn.commit()
 
+# creat a cookie
+import Cookie
+import os
+
+import datetime
+
+
+cookie = Cookie.SimpleCookie()
+cookie['username'] = aname
+expires = datetime.datetime.utcnow() + datetime.timedelta(days=30) # expires in 30 days
+cookie['username']['expires'] = expires.strftime("%a, %d %b %Y %H:%M:%S GMT")
+#cookie['username']['expires'] = time.strftime("%a, %d-%b-%Y %T GMT", t)
 
 # print the http header
 print "Content-Type: text/html"
+print cookie
 print # don't forget the extra newline
 
 print '<html>'

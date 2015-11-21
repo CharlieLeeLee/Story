@@ -75,6 +75,8 @@ for r in c.execute('select * from accounts;'):
         print '<h2>Talent: '+r[5]+'</h2>'
         print '<img src="'+r[4]+'"/>'
 print '<p><a href="home.py">Back to Story</a></p>'
+print '<p><a href="../Update.html">Update Profile</a></p>'
+print '<p><a href="logout.py">Log Out</a></p>'
 print '<hr><h3>Other Users:</h3>'
 
 # print out the data for all users in the database

@@ -13,7 +13,7 @@ def notLoggedInPage():
         print '<html>'
         print ' <head>'
         print '		<title>'
-        print '			Logging In...'
+        print '			Logging Out...'
         print '		</title>'
         print '		<style type="text/css">'
         # in Python, use ''' triple quotes ''' to create a multi-line string
@@ -88,8 +88,7 @@ def loggedInPage(username):
 
         '''
         print '<body>'
-        print '<h1>Hello ' + username +'</h1>'
-        print '<a href="profile.py?aname=' + username + '">Your Profile</a>'
+        print '<a href="login.py">Log In</a>'
         print '</body></html>'
 
 import Cookie
@@ -97,6 +96,9 @@ import os
 
 import cgi
 form = cgi.FieldStorage()
+
+import datetime
+expires = datetime.datetime.utcnow() - datetime.timedelta(days=30)
 
 # if not logged in, show login screen.
 stored_cookie_string = os.environ.get('HTTP_COOKIE')
@@ -110,12 +112,12 @@ else:
         cookie = Cookie.SimpleCookie(stored_cookie_string)
         # if it's an appropriate cookie, use it
         if 'username' in cookie:
-                aname = cookie['username'].value
-
+                cookie['username']['expires']=expires.strftime("%a, %d %b %Y %H:%M:%S GMT")
                 print "Content-type: text/html"
+                print cookie
                 print
-                loggedInPage(aname)
-
+                notLoggedInPage()
+                
         # if cookie is useless
         else:
                 print "Content-type: text/html"

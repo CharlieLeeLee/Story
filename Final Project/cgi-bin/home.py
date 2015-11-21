@@ -60,6 +60,7 @@ def loggedIn():
     print '    <script src="https://apis.google.com/js/api.js"></script>'
     print '    <script src="https://www.gstatic.com/realtime/realtime-client-utils.js"></script>'
     print '    </head>'
+    #django_browserid.helpers.browserid_logout(text='Log out', next=None, link_class='browserid-logout', attrs=None)
     print '''
   <body>
     <main>
@@ -144,13 +145,20 @@ import os
 
 stored_cookie_string = os.environ.get('HTTP_COOKIE')
 if not stored_cookie_string:
+    print "Content-type: text/html"
+    print # don't forget the extra newline!
     notLoggedIn()
-    
+
 else:
     cookie = Cookie.SimpleCookie(stored_cookie_string)
     if 'username' in cookie:
         aname = cookie['username'].value
+
+        print "Content-type: text/html"
+        print # don't forget the extra newline!
         loggedIn()
 
     else:
+        print "Content-type: text/html"
+        print # don't forget the extra newline!
         notLoggedIn()
