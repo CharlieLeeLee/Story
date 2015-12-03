@@ -15,3 +15,5 @@ After successful update:
 
 New Profile page:
 ![New Profile Page] (ss7.png)
+
+[The Fun Stuff](https://www.youtube.com/watch?v=HGWlXOG3GzI)
