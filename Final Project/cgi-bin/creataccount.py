@@ -57,30 +57,9 @@ print ' <head>'
 print '		<title>'
 print '			Account Page'
 print '		</title>'
-print '		<style type="text/css">'
+print '		<link rel="stylesheet" type="text/css" href="../Styles/style.css"/>'
 # in Python, use ''' triple quotes ''' to create a multi-line string
 print '''
-			h1 {
-				font-size: 100px;
-				font-family: arial;
-				color: #337AB7;
-			}
-
-			img {
-				width: 300px;
-			}
-
-			h2 {
-				color: #337AB7;
-				font-family: arial;
-			}
-
-			h3 {
-                                font-size: 20px;
-                                font-family: arial;
-                                color: #337AB7;
-		</style>
-
 	</head>
 	<body>
 '''

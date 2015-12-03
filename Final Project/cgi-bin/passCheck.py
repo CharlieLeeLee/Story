@@ -12,34 +12,8 @@ def printstyle():
     print '		<title>'
     print '			Logging In!'
     print '		</title>'
-    print '		<style type="text/css">'
-    # in Python, use ''' triple quotes ''' to create a multi-line string
-    print '''
-                            h1 {
-                                    font-size: 100px;
-                                    font-family: arial;
-                                    color: #337AB7;
-                            }
-
-                            img {
-                                    width: 300px;
-                            }
-
-                            h2 {
-                                    color: #337AB7;
-                                    font-family: arial;
-                            }
-
-                            h3 {
-                                    font-size: 20px;
-                                    font-family: arial;
-                                    color: #337AB7;
-                    </style>
-
-            </head>
-
-    '''
-
+    print '		<link rel="stylesheet" type="text/css" href="../Styles/style.css"/>'
+    print ' </head>'
 import cgi
 form = cgi.FieldStorage()
 aname = form['username'].value

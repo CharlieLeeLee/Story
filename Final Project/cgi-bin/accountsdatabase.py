@@ -16,7 +16,8 @@ conn = sqlite3.connect('accounts.db')
 c = conn.cursor()
 
 # create a new 'accounts' table with six columns: fname, lname,aname,pw,image,writing
-c.execute('create table accounts(aname varchar(100) primary key, fname varchar(100), lname varchar(100), pw varchar(100), image varchar(100), writing varchar(10))')
+c.execute('create table accounts(aname varchar(100) primary key, fname varchar(100), lname varchar(100), pw varchar(100), image varchar(100), writing varchar(10));')
+c.execute('create table documents(title varchar(100), address primary key varchar(70), owner varchar(100));')
 
 # insert 3 rows of data into the 'users' table
 #c.execute("insert into users values('Philip', 30, '../cat.jpg');")

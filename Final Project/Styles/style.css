@@ -1,0 +1,56 @@
+h1{
+	text-align:center;
+	color: #337AB7;
+	font-size: 150px;
+	padding-top: 150px;
+	font-family:arial;
+}
+h2{
+	color: #337AB7;
+	font-family: arial;
+	font-size: 50px;
+}
+h3 {
+	color: #337AB7;
+	font-family: arial;
+	font-size: 20px;
+}
+
+h4{
+	text-align:center;
+	font-size:50px;
+	color: #337AB7;
+	font-family:arial;
+}
+body {
+	padding-left: 80px;
+	padding-right: 80px;
+	font-family: arial;
+	background-image: url("background.png");
+	background-position: top left;
+}
+
+div {
+	padding: 25px;
+	width: 780px;
+	border: 2px #337AB7;
+	background-color: light gray;
+}
+img {
+	width: 300px;
+}
+a.button {
+	-webkit-appearance: button;
+   	-moz-appearance: button;
+   	appearance: button;
+	color: #337AB7;
+	margin:80px;
+
+   	text-decoration:arial;
+	align: center;
+	font-size:25px;
+}
+textarea{
+	width: 1000px;
+	height: 2000px;
+}

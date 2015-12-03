@@ -3,13 +3,6 @@
 # CSC210 - Profile Page - 11/08/2015
 # Charlie Norvell
 
-# To run, start AMPSS and visit URLs like the following to insert new
-# entries into the database, then check your database's contents using
-# lecture4-query-database.py
-#
-# http://localhost/cgi-bin/lecture4.py?my_name=Joe&my_age=32&my_image=../cat.jpg
-# http://localhost/cgi-bin/lecture4.py?my_name=Donna&my_age=37&my_image=../dog.jpg
-
 # useful for debugging
 import cgitb
 cgitb.enable()
@@ -19,7 +12,6 @@ form = cgi.FieldStorage()
 
 aname = form['aname'].value
 
-# insert new user data into the database
 import sqlite3
 
 conn = sqlite3.connect('accounts.db')
@@ -35,50 +27,26 @@ print ' <head>'
 print '		<title>'
 print '			'+aname+'\'s Profile'
 print '		</title>'
-print '		<style type="text/css">'
-# in Python, use ''' triple quotes ''' to create a multi-line string
-print '''
-			h1 {
-				font-size: 100px;
-				font-family: arial;
-				color: #337AB7;
-			}
+print '		<link rel="stylesheet" type="text/css" href="../Styles/style.css">'
+print '    <script src="https://apis.google.com/js/api.js"></script>'
+print '    <script src="https://www.gstatic.com/realtime/realtime-client-utils.js"></script>'
+print ' </head>'
 
-			img {
-				width: 300px;
-			}
-
-			h2 {
-				color: #337AB7;
-				font-family: arial;
-			}
-
-			h3 {
-                                font-size: 20px;
-                                font-family: arial;
-                                color: #337AB7;
-                        }
-                        body {
-                            font-family: arial;
-                        }
-		</style>
-
-	</head>
-    
-'''
-print '<body>'
-print '<h1>'+aname+'\'s Profile</h1>'
+print '<body>'    
+print '<h2>'+aname+'\'s Profile</h2>'
 #find and print out user's information
 for r in c.execute('select * from accounts;'):
     if (r[0] == aname):
-        print '<h2>Name: '+r[1]+' '+r[2]+'</h2>'
-        print '<h2>Talent: '+r[5]+'</h2>'
+        print '<h3>Name: '+r[1]+' '+r[2]+'</h3>'
+        print '<h3>Talent: '+r[5]+'</h3>'
         print '<img src="'+r[4]+'"/>'
-print '<p><a href="home.py">Back to Story</a></p>'
+print '<p><button id="auth_button">Authorize your Google account</button></p>'
+print '<p><a href="home.py">New Story</a></p>'
 print '<p><a href="../Update.html">Update Profile</a></p>'
 print '<p><a href="logout.py">Log Out</a></p>'
-print '<hr><h3>Other Users:</h3>'
+print '<p><a href="delete.py">Delete Account</a></p>'
 
+print '<hr><h3>Other Users:</h3>'
 # print out the data for all users in the database
 for r in c.execute('select * from accounts;'):
     if (r[0] != aname):
@@ -92,6 +60,36 @@ for r in c.execute('select * from accounts;'):
         print '</h3>'
         
 conn.close()
+
+print '''
+    <script>
+        var clientID='754145444518-q7ucn0o0jr3m2ae69ogqt1orqgublnn1.apps.googleusercontent.com';
+        if (!/^([0-9])$/.test(clientId[0])) {
+            alert('Invalid Client ID - did you forget to insert your application Client ID?');
+        }
+        // Create a new instance of the realtime utility with your client ID.
+        var realtimeUtils = new utils.RealtimeUtils({ clientId: clientId });
+
+        authorize();
+
+        function authorize() {
+            // Attempt to authorize
+             realtimeUtils.authorize(function(response){
+              if(response.error){
+                // Authorization failed because this is the first time the user has used your application,
+                // show the authorize button to prompt them to authorize manually.
+                var button = document.getElementById('auth_button');
+                button.classList.add('visible');
+                button.addEventListener('click', function () {
+                  realtimeUtils.authorize(function(response){
+                  }, true);
+                });
+              } else {
+                  start();
+              }
+            }, false);
+        }
+'''
 
 print '	</body>'
 print '</html>'

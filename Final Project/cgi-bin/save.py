@@ -1,7 +1,7 @@
 #!"C:\Python27\python.exe"
 
-# CSC210 - log in - 11/08/2015
-# Yumeng Liu
+# CSC210 - Save Document - 12/1/2015
+# Charlie Norvell
 
 
 # useful for debugging
@@ -17,10 +17,8 @@ stored_cookie_string = os.environ.get('HTTP_COOKIE')
 cookie = Cookie.SimpleCookie(stored_cookie_string)
 
 aname = cookie['username'].value
-firstname = form['first_name'].value
-lastname = form['last_name'].value
-talent = form['writing_talent'].value
-picture = form['profile'].value
+title = form['dname'].value
+url = form['url'].value
 
 
 import sqlite3
@@ -37,10 +35,8 @@ data = {}
 
 
 c.execute("""
-        UPDATE accounts
-        SET fname=?, lname=?, image=?, writing=?
-        WHERE aname=?
-        """, (firstname, lastname, picture, talent, aname))
+        INSERT into documents values(?, ?, ?)
+        """, (title, url, aname))
 conn.commit()
 
 conn.close()

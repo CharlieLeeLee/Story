@@ -1,6 +1,7 @@
 <html>
 
 <head>
+ <link rel="stylesheet" type="text/css" href="Styles/style.css"/>
 <title>Update</title>
 
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -27,19 +28,17 @@ $(document).ready(function() {
 				profile: pic
 			},
 			// Whether this is a POST or GET request
-			type: "GET",
+			type: "POST",
 			// The type of data we expect back
 			//dataType : "text",
-			dataType : "json",
+			//dataType : "json",
 			// Code to run if the request succeeds;
 			// the response is passed to the function
 			success: function( data ) {
 				console.log("You received some data!");
 				console.log(data);
 
-				$("#nameDiv").html(data.myName);
-				$("#talentDiv").html(data.myTalent);
-				$("#image").attr("src", data.myImage);
+				$("#nameDiv").html("Update Successful");
 			},
 			// Code to run if the request fails
 			error: function() {
@@ -52,7 +51,7 @@ $(document).ready(function() {
 
 </head>
 	<body>
-		<h1>Story Profile Change</h1>
+		<h2>Story Profile Change</h2>
 
 		First Name:
 		<input id="firstname" type="text" size = "50">
@@ -81,9 +80,8 @@ $(document).ready(function() {
 
 	  <button id="changeButton">Change</button>
 
-		<div id="nameDiv"> Your Name </div>
-		<div id="talentDiv"> Your Writing Talent </div>
-		<img id="image">
+		<div id="nameDiv"> </div>
+		<a href="Story.html">Homepage</a>
 		
 
 
