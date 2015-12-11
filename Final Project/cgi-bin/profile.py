@@ -32,64 +32,57 @@ print '    <script src="https://apis.google.com/js/api.js"></script>'
 print '    <script src="https://www.gstatic.com/realtime/realtime-client-utils.js"></script>'
 print ' </head>'
 
-print '<body>'    
-print '<h2>'+aname+'\'s Profile</h2>'
+print '<body>'
+print '''
+<header>
+    <ul style="position:fixed;">
+        <li><a href="Story.py">Story</a></li>
+        <li><a name="about" href="../Story.html#about">About</a></li>
+        <li><a name="home" href="home.py">Story Home</a></li>
+        <ul style="float:right;list-style-type:none;">
+'''
+print       '<li><a class="active" href="profile.py?aname=' + aname +'">' + aname + '</a></li>'
+print '''
+             <li><a href="../Update.html">Update Profile</a></li>
+             <li><a href="delete.py">Delete Profile</a></li>
+             <li><a href="logout.py">Log Out</a></li>
+        </ul>
+    </ul>
+</header>
+'''
+print '<h2>Hello, '+aname+'</h2>'
 #find and print out user's information
 for r in c.execute('select * from accounts;'):
     if (r[0] == aname):
-        print '<h3>Name: '+r[1]+' '+r[2]+'</h3>'
-        print '<h3>Talent: '+r[5]+'</h3>'
-        print '<img src="'+r[4]+'"/>'
-print '<p><button id="auth_button">Authorize your Google account</button></p>'
-print '<p><a href="home.py">New Story</a></p>'
-print '<p><a href="../Update.html">Update Profile</a></p>'
-print '<p><a href="logout.py">Log Out</a></p>'
-print '<p><a href="delete.py">Delete Account</a></p>'
+        print '<div style="float:left;height:400px;width:45%;">'
+        print '  <div id="profilepic">'
+        print '  <img src="'+r[4]+'"/>'
+        print '  </div>'
+        print '</div>'
+        print '<div style="float:right;height:400px;width:55%;">'
+        print '<div id="profileinfo">'
+        print '  <h4>Name: '+r[1]+' '+r[2]+'</h4>'
+        print '  <h4>Talent: '+r[5]+'</h4>'
+        print '  </div>'
+        print '</div>'
 
-print '<hr><h3>Other Users:</h3>'
+print '<hr><h3 style="text-align:left;">Other Users:</h3>'
+print '<br><br>'
 # print out the data for all users in the database
 for r in c.execute('select * from accounts;'):
     if (r[0] != aname):
-        firstname = r[1];
-        lastname = r[2];
-        wrt = r[5];
-        img = r[4];
-        print '<h3>Name: '+firstname+' '+lastname
-        print '<br>Talent: '+wrt
-        print '<br><img src="'+img+'"/>'
-        print '</h3>'
-        
+        print '<div style="float:left;height:400px;width:25%;">'
+        print '  <div id="profilepic">'
+        print '  <img src="'+r[4]+'"/>'
+        print '  </div>'
+        print '</div>'
+        print '<div style="float:right;height:400px;width:75%;">'
+        print '<div id="profileinfo">'
+        print '  <h3>Name: '+r[1]+' '+r[2]+'</h3>'
+        print '  <h3>Talent: '+r[5]+'</h3>'
+        print '  </div>'
+        print '</div>'
+
 conn.close()
-
-print '''
-    <script>
-        var clientID='754145444518-q7ucn0o0jr3m2ae69ogqt1orqgublnn1.apps.googleusercontent.com';
-        if (!/^([0-9])$/.test(clientId[0])) {
-            alert('Invalid Client ID - did you forget to insert your application Client ID?');
-        }
-        // Create a new instance of the realtime utility with your client ID.
-        var realtimeUtils = new utils.RealtimeUtils({ clientId: clientId });
-
-        authorize();
-
-        function authorize() {
-            // Attempt to authorize
-             realtimeUtils.authorize(function(response){
-              if(response.error){
-                // Authorization failed because this is the first time the user has used your application,
-                // show the authorize button to prompt them to authorize manually.
-                var button = document.getElementById('auth_button');
-                button.classList.add('visible');
-                button.addEventListener('click', function () {
-                  realtimeUtils.authorize(function(response){
-                  }, true);
-                });
-              } else {
-                  start();
-              }
-            }, false);
-        }
-'''
-
 print '	</body>'
 print '</html>'

@@ -7,46 +7,58 @@
 		<link rel="stylesheet" type="text/css" href="Styles/style.css"/>
 	</head>
 	<body>
-		<h2> Welcome to Story </h2>
-		<div>
+		<header>
+			<ul style="position:fixed;">
+				<li><a href="Story.html">Story</a></li>
+				<li><a name="about" href="Story.html#about">About</a></li>
+				<ul style="float:right;list-style-type:none;">
+					<li><a class="active" href="CreatAccount.html">Sign Up</a></li>
+					<li><a href="cgi-bin/login.py">Sign in</a></li>
+				</ul>
+			</ul>
+		</header>
+
+		<div id="signin">
 		 <form method="post" action="cgi-bin/creataccount.py">
+			 <h2>Welcome to Story</h2>
 
-		 First Name:
-		 <input name="firstname" type="text" size = "50">
-		 <br>
-		 <br>
+			 <p>
+				 <label for="firstname"/>
+				 <input id="firstname" name="firstname" type="text" required="required" placeholder="First Name">
+			 </p>
 
-		 Last Name:
-		 <input name="lastname" type="text" size = "50">
-		 <br>
-		 <br>
+			 <p>
+				 <label for="lastname"/>
+				 <input id="lastname" name="lastname" type="text" required="required" placeholder="Last Name">
+			 </p>
 
-		 Account Name:
-		 <input name="accountname" type="text" size = "50">
-		 <br>
-		 <br>
+			 <p>
+				 <label for="accountname"/>
+				 <input id="accountname" name="accountname" type="text" required="required" placeholder="Account Name">
+			 </p>
 
-		 Password:
-		 <input name="password" type="text" size = "50">
-		 <br>
-		 <br>
+			 <p>
+				 <label for="password"/>
+				 <input id="password" name="password" type="password" required="required" placeholder="Password">
+			 </p>
 
-		 Writing Talent:
+			 <p>
+				 <label for="profile"/>
+				 <input id="profile" name="profile" type="text" required="required" placeholder="Profile 	Picture Path">
+			 </p>
+
+     <p style="color:#337AB7;font-weight:bold;">Writing Talent:</p>
 		 <select name = "writingtalent">
   	  	<option value="novel">Novel</option>
   		  <option value="screenplay">Screen Play</option>
   		  <option value="theatre">Theatre</option>
   		  <option value="poem">Poem</option>
 		 </select>
-		 <br>
-		 <br>
+		 <br><br>
 
-		 Profile picture:
-		 <input name="profile" type="text" size = "50">
-		 <br>
-		 <br>
 
-		 <input type="submit" name="submit">
+		<button class="button" type="submit">Sign Up</button>
+
 	  </form>
 	  </div>
   </body>

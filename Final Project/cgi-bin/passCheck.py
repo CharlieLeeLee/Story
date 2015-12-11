@@ -32,7 +32,9 @@ import sqlite3
 
 conn = sqlite3.connect('accounts.db')
 c = conn.cursor()
+baduser = True;
 for r in c.execute('select * from accounts where aname=?;',[aname]):
+    baduser = False;
     if r[3] == pw:
         cookie = Cookie.SimpleCookie()
         cookie['username'] = aname
@@ -51,30 +53,64 @@ for r in c.execute('select * from accounts where aname=?;',[aname]):
         print '    <title>Page Redirection</title>'
         print '</head>'
         print '<body>'
-        print '        If you are not redirected automatically, follow the <a href="profile.py?aname=' + aname + '">link to Home page</a>'
+        print '''
+        <header>
+            <ul style="position:fixed;">
+                <li><a href="Story.py">Story</a></li>
+                <li><a name="about" href="../Story.html#about">About</a></li>
+                <ul style="float:right;list-style-type:none;">
+                     <li><a href="CreatAccount.html">Sign Up</a></li>
+					 <li><a href="cgi-bin/login.py">Sign in</a></li>
+                </ul>
+            </ul>
+        </header>
+        '''
+        print '     If you are not redirected automatically, follow the <a href="profile.py?aname=' + aname + '">link to Home page</a>'
         print '</body>'
         print '</html>'
-        conn.close()
 
     else:
         print "Content-type: text/html"
         print
         printstyle()
         print '<body>'
-        print '<p>Incorrect password</p>'
-        print '<A HREF = "CreatAccount.html" class="button">Register New</A>'
-        print '<A HREF = "login.py" class="button">Try again</A>'
+        print '''
+        <header>
+            <ul style="position:fixed;">
+                <li><a href="Story.py">Story</a></li>
+                <li><a name="about" href="../Story.html#about">About</a></li>
+                <ul style="float:right;list-style-type:none;">
+                     <li><a href="../CreatAccount.html">Sign Up</a></li>
+					 <li><a href="login.py">Sign in</a></li>
+                </ul>
+            </ul>
+        </header>
+        '''
+        print '<h2>Incorrect password</h2>'
+        print '<p style="text-align:center;">Please click SIGN IN to try again, or SIGN UP to create a new account.</p>'
         print '</body>'
         print '</html>'
-        conn.close()
+if (baduser):
+    print "Content-type: text/html"
+    print
+    print '<html>'
+    printstyle()
+    print '<body>'
+    print '''
+    <header>
+        <ul style="position:fixed;">
+            <li><a href="Story.py">Story</a></li>
+            <li><a name="about" href="../Story.html#about">About</a></li>
+            <ul style="float:right;list-style-type:none;">
+                 <li><a href="../CreatAccount.html">Sign Up</a></li>
+                 <li><a href="login.py">Sign in</a></li>
+            </ul>
+        </ul>
+    </header>
+    '''
+    print '<h2>User not found</h2>'
+    print '<p style="text-align:center;">Please click SIGN UP to create a new account.</p>'
+    print '</body>'
+    print '</html>'
 
 conn.close()
-print "Content-type: text/html"
-print
-print '<html>'
-printstyle()
-print '<h2>User not found</h2>'
-print '<p>The username you are trying to use does not exist.</p>'
-print '<p><a href="../CreatAccount.html">Click here to create a new account</a></p>'
-print '</body>'
-print '</html>'

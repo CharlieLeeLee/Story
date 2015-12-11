@@ -33,8 +33,19 @@ def notLoggedInPage():
     print '		<link rel="stylesheet" type="text/css" href="../Styles/style.css">'
     print ' </head>'
     print '<body>'
+    print '''
+    <header>
+        <ul style="position:fixed;">
+            <li><a href="Story.py">Story</a></li>
+            <li><a name="about" href="../Story.html#about">About</a></li>
+            <ul style="float:right;list-style-type:none;">
+                 <li><a href="../CreatAccount.html">Sign Up</a></li>
+                 <li><a href="login.py">Sign In</a></li>
+            </ul>
+        </ul>
+    </header>
+    '''
     print ' <h2>Not Logged In</h2>'
-    print ' <p><a href="../Story.html">Return to Homepage</a></p>'
 
 def loggedInPage():
     print '<html>'
@@ -45,8 +56,19 @@ def loggedInPage():
     print '		<link rel="stylesheet" type="text/css" href="../Styles/style.css">'
     print ' </head>'
     print '<body>'
+    print '''
+    <header>
+        <ul style="position:fixed;">
+            <li><a href="Story.py">Story</a></li>
+            <li><a name="about" href="../Story.html#about">About</a></li>
+            <ul style="float:right;list-style-type:none;">
+                 <li><a href="../CreatAccount.html">Sign Up</a></li>
+                 <li><a href="login.py">Sign In</a></li>
+            </ul>
+        </ul>
+    </header>
+    '''
     print ' <h2>Account Deleted</h2>'
-    print ' <p><a href="../Story.html">Return to Homepage</a></p>'
 
 import datetime
 expires = datetime.datetime.utcnow() - datetime.timedelta(days=30)
@@ -69,7 +91,7 @@ else:
                 print cookie
                 print
                 loggedInPage()
-                
+
         # if cookie is useless
         else:
                 print "Content-type: text/html"

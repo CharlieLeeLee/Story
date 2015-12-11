@@ -1,4 +1,4 @@
-h1{
+/*h1{
 	text-align:center;
 	color: #337AB7;
 	font-size: 150px;
@@ -49,6 +49,112 @@ a.button {
    	text-decoration:arial;
 	align: center;
 	font-size:25px;
+}
+textarea{
+	width: 1000px;
+	height: 2000px;
+}
+*/
+
+.main {
+	height:500px;
+}
+#about{
+	background-color: #C0C0C0;
+}
+
+#signin{
+	text-align: center;
+}
+
+#profilepic{
+	float:right;
+  height:250px;
+	width:250px;
+	overflow: hidden;
+	border-radius: 50%;
+}
+#profilepic img{
+  height:400px;
+	width:400px;
+	margin:-75px 0 0 -100px;
+}
+
+#profileinfo{
+	width:350px;
+  float:left;
+  padding:10px;
+}
+
+
+.button{
+	height:30px;
+	width:150px;
+	background-color: #337AB7;
+	color:white;
+	border-color: #2e6da4;
+}
+/*** HEADER Navigation bar***/
+header ul {
+    list-style-type: none; /* remove the default dot for all items*/
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+		top: 0;
+		left: 0;
+		right: 0;
+}
+
+li {
+    float: left; /* make all the items slide next to each other*/
+}
+
+li a {
+    display: block; /* make all block clickable*/
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover{
+    background-color: #111;
+}
+
+li a.active {
+    background-color: #337AB7;
+}
+
+/*** BODY ***/
+h1{
+	text-align:center;
+	color: #337AB7;
+	font-size: 150px;
+	padding-top:100px;
+}
+h2{
+	text-align: center;
+	padding-top:150px;
+	color: #337AB7;
+	font-size: 50px;
+}
+h3 {
+	padding-top: 20px;
+	text-align: center;
+	font-family: arial;
+	font-size: 20px;
+}
+h4{
+	text-align:center;
+	font-size:30px;
+	color: #337AB7;
+}
+input{
+	-webkit-appearance: textfield;
+	-webkit-rtl-ordering: logical;
+	-webkit-user-select: text;
+	cursor:auto;
 }
 textarea{
 	width: 1000px;

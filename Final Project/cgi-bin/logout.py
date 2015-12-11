@@ -13,22 +13,46 @@ def notLoggedInPage():
         print '<html>'
         print ' <head>'
         print '		<title>'
-        print '			Logging Out...'
+        print '			Logging In...'
         print '		</title>'
-        print '		<link rel="stylesheet" type="text/css" href="../Styles/style.css"/>'
         # in Python, use ''' triple quotes ''' to create a multi-line string
-        print '</head>'
+        print '''
+                <link rel="stylesheet" type="text/css" href="../Styles/style.css"/>
+
+                </head>
+        '''
         print '<body>'
-        print'<h2>You are not yet logged in.</h2>'
+        print '<div id="signin">'
+        print '''
+        <header>
+			<ul style="position:fixed;">
+				<li><a href="Story.py">Story</a></li>
+				<li><a name="about" href="../Story.html#about">About</a></li>
+				<ul style="float:right;list-style-type:none;">
+					<li><a href="../CreatAccount.html">Sign Up</a></li>
+					<li><a class="active" href="cgi-bin/login.py">Sign in</a></li>
+				</ul>
+			</ul>
+		</header>
+        '''
+        print'<h2>Please Sign In</h2>'
         print'<form method="post" action="passCheck.py">'
-        print'Username:'
-        print'<input name="username" type=text size="30"/>'
-        print'<br><br>'
-        print'Password:'
-        print'<input name="password" type=text size="30"/>'
-        print'<input type="submit"/>'
+        print '''
+        <p>
+           <label for="username"/>
+           <input id="username" name="username" type="text" required="required" placeholder="Account Name">
+        </p>
+        <p>
+           <label for="password"/>
+           <input id="password" name="password" type="password" required="required" placeholder="Password">
+        </p>
+
+        '''
+        print'<button class="button" type="submit">Sign In</button>'
         print'</form>'
+        print'</div>'
         print'</body></html>'
+
 
 def loggedInPage(username):
         print '<html>'
@@ -36,35 +60,22 @@ def loggedInPage(username):
         print '		<title>'
         print '			Logged In!'
         print '		</title>'
-        print '		<style type="text/css">'
-        # in Python, use ''' triple quotes ''' to create a multi-line string
-        print '''
-                                h1 {
-                                        font-size: 100px;
-                                        font-family: arial;
-                                        color: #337AB7;
-                                }
-
-                                img {
-                                        width: 300px;
-                                }
-
-                                h2 {
-                                        color: #337AB7;
-                                        font-family: arial;
-                                }
-
-                                h3 {
-                                        font-size: 20px;
-                                        font-family: arial;
-                                        color: #337AB7;
-                        </style>
-
-                </head>
-
-        '''
+        print '         <link rel="stylesheet" type="text/css" href="../Styles/style.css"/>'
+        print ' </head>'
         print '<body>'
-        print '<a href="login.py">Log In</a>'
+        print'''
+        		<header>
+        			<ul style="position:fixed;">
+        				<li><a href="Story.html">Story</a></li>
+        				<li><a name="about" href="Story.html#about">About</a></li>
+        				<ul style="float:right;list-style-type:none;">
+        '''
+        print '					<li><a href="profile.py?aname=' + username + '">' + username + '</a></li>'
+        print'''		</ul>
+        			</ul>
+        		</header>
+        '''
+        print '<h2>Hello ' + username +'</h2>'
         print '</body></html>'
 
 import Cookie
@@ -93,7 +104,7 @@ else:
                 print cookie
                 print
                 notLoggedInPage()
-                
+
         # if cookie is useless
         else:
                 print "Content-type: text/html"

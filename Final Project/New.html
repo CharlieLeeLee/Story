@@ -8,29 +8,33 @@
 		<script type = "text/javascript" src="https://apis.google.com/js/api.js"></script>
 	</head>
 	<body>
-		<h1> Create a New Story </h1>
-		 <form method="post" action="cgi-bin/home.py">
+		<header>
+		    <ul style="position:fixed;">
+		        <li><a href="cgi-bin/Story.py">Story</a></li>
+		        <li><a name="about" href="Story.html#about">About</a></li>
+		        <li><a name="home" href="cgi-bin/home.py">Story Home</a></li>
+		        <ul style="float:right;list-style-type:none;">
+		             <li><a href="Update.html">Update Profile</a></li>
+		             <li><a href="cgi-bin/delete.py">Delete Profile</a></li>
+		             <li><a href="cgi-bin/logout.py">Log Out</a></li>
+		        </ul>
+		    </ul>
+		</header>
 
-		 Title:
-		 <input name="title" type="text" size = "50">
-		 <br>
-		 <br>
-		 
-		 <input id="url" name="id" type="submit"/>
-	  	</form>
-		<script>
-		 	var clientId = '754145444518-q7ucn0o0jr3m2ae69ogqt1orqgublnn1.apps.googleusercontent.com';
+		<h2> Create a New Story </h2>
+		 <form method="post" action="cgi-bin/writing.py">
 
-     	 	if (!/^([0-9])$/.test(clientId[0])) {
-        		alert('Invalid Client ID - did you forget to insert your application Client ID?');
-      		}
-      		// Create a new instance of the realtime utility with your client ID.
-      		var realtimeUtils = new utils.RealtimeUtils({ clientId: clientId });
-			
-			function start() {
-		 	realtimeUtils.createRealtimeFile('New Quickstart File', function(createResponse){
-              document.getElementById("url").value = createResponse.id;
-			});
-		 </script>
+		<p style="text-align:center;">
+	  <label for="title"/>
+	  <input id="title" name="title" type="text" required="required" placeholder="Title">
+	  </p>
+
+		<p style="text-align:center;">
+	  <label for="description"/>
+		<label for="description"/>
+		<input id="description" name="description" type="text" required="required" placeholder="Describe your story"/>
+	   <br><br>
+		<input id="submit" name="submit" type="submit" class="button"/>
+		</p>
   </body>
 </html>

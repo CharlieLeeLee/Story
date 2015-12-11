@@ -14,7 +14,7 @@ $(document).ready(function() {
 		var lname = $("#lastname").val();
 		var talent = $("#writingtalent").val();
 		var pic = $("#profile").val();
-	
+
 		// From: http://learn.jquery.com/ajax/jquery-ajax-methods/
 		// Using the core $.ajax() method
 		$.ajax({
@@ -31,14 +31,11 @@ $(document).ready(function() {
 			type: "POST",
 			// The type of data we expect back
 			//dataType : "text",
-			//dataType : "json",
+		 //dataType : "json",
 			// Code to run if the request succeeds;
 			// the response is passed to the function
 			success: function( data ) {
-				console.log("You received some data!");
-				console.log(data);
-
-				$("#nameDiv").html("Update Successful");
+				$("#ResultDiv").html("Update Successful");
 			},
 			// Code to run if the request fails
 			error: function() {
@@ -46,43 +43,90 @@ $(document).ready(function() {
 			},
 		});
 	});
+
+  $("#viewButton").click(function() {
+
+    // From: http://learn.jquery.com/ajax/jquery-ajax-methods/
+    // Using the core $.ajax() method
+    $.ajax({
+      // The URL for the request
+      url: "cgi-bin/read.py",
+      // The data to send (will be converted to a query string)
+      data: null,
+      // Whether this is a POST or GET request
+      type: "GET",
+      // The type of data we expect back
+      //dataType : "text",
+      dataType : "json",
+      // Code to run if the request succeeds;
+      // the response is passed to the function
+      success: function( data ) {
+        $("#viewDiv").html("<b>New Name: </b>" + data.firstname +" " + data.lastname
+      + "<br>" + "<b>New Writing Talent: </b>" + data.writingtalent
+	  + "<br><img src='"+data.profile+"'/>");
+      },
+      // Code to run if the request fails
+      error: function() {
+        alert( "Sorry, there was a problem!" );
+      },
+    });
+  });
+
 });
 </script>
 
 </head>
 	<body>
-		<h2>Story Profile Change</h2>
+    <header>
+     <ul style="position:fixed;">
+        <li><a href="cgi-bin/Story.py">Story</a></li>
+        <li><a name="about" href="Story.html#about">About</a></li>
+        <li><a name="home" href="cgi-bin/home.py">Story Home</a></li>
+        <ul style="float:right;list-style-type:none;">
+             <li><a class="active" href="Update.html">Update Profile</a></li>
+             <li><a href="cgi-bin/delete.py">Delete Profile</a></li>
+             <li><a href="cgi-bin/logout.py">Log Out</a></li>
+        </ul>
+     </ul>
+    </header>
 
-		First Name:
-		<input id="firstname" type="text" size = "50">
-		<br>
-		<br>
+    <div id="signin">
+       <h2>Story Profile Change</h2>
 
-		Last Name:
-		<input id="lastname" type="text" size = "50">
-		<br>
-		<br>
+       <p>
+         <label for="firstname"/>
+         <input id="firstname" name="firstname" type="text" required="required" placeholder="First Name">
+       </p>
 
-		Writing Talent:
-		<select id = "writingtalent">
-			<option value="novel">Novel</option>
-			<option value="screenplay">Screen Play</option>
-			<option value="theatre">Theatre</option>
-			<option value="poem">Poem</option>
-		</select>
-		<br>
-		<br>
+       <p>
+         <label for="lastname"/>
+         <input id="lastname" name="lastname" type="text" required="required" placeholder="Last Name">
+       </p>
 
-		Profile picture:
-		<input id="profile" type="text" size = "50">
-		<br>
-		<br>
+     <p style="color:#337AB7;font-weight:bold;">Writing Talent:</p>
+     <select id = "writingtalent">
+        <option value="novel">Novel</option>
+        <option value="screenplay">Screen Play</option>
+        <option value="theatre">Theatre</option>
+        <option value="poem">Poem</option>
+     </select>
+     <br>
 
-	  <button id="changeButton">Change</button>
+       <p>
+         <label for="profile"/>
+         <input id="profile" name="profile" type="text" required="required" placeholder="Profile Path">
+       </p>
+       <button class="button" id="changeButton" style="text-align:center;">Change</button>
+	</div>
 
-		<div id="nameDiv"> </div>
-		<a href="Story.html">Homepage</a>
-		
+		<div id="ResultDiv" style="text-align:center;color:#4CAF50;"> </div>
+    <br>
+    <br>
+
+    <div style="text-align:center;">
+      <hr><button class="button" id="viewButton">View Updates</button>
+      <div id="viewDiv"></div>
+    </div>
 
 
 	</body>

@@ -10,85 +10,48 @@ cgitb.enable()
 
 def noCookiePage():
 
+    print '<html>'
+    print ' <head>'
+    print '		<title>'
+    print '			Story'
+    print '		</title>'
+    print '		<link rel="stylesheet" type="text/css" href="../Styles/style.css"/>'
+    # in Python, use ''' triple quotes ''' to create a multi-line string
     print '''
-        <html>
-        	<head>
-        		<title> Story </title>
-        		<style type="text/css">
-        			h1{
-        				text-align:center;
-        				color: #337AB7;
-        				font-size: 150px;
-        				padding-top: 150px;
-        				font-family:arial;
-        			}
-        			body{
-        				text-align:center;
-        				font-size:50px;
-        				color: #337AB7;
-        				font-family:arial;
-        			}
-        			a.button {
-            	-webkit-appearance: button;
-            	-moz-appearance: button;
-            	appearance: button;
-        			color: #337AB7;
-        			margin:80px;
-
-            	text-decoration:arial;
-        			font-size:25px;
-        			}
-
-        		</style>
-        	</head>
-        	<body>
-        		<h1> Story </h1>
-        		<p> Write your story,dream and life.</p>
-
-        		<A HREF = "CreatAccount.html" class="button">Register</A>
-        		<A HREF = "cgi-bin/login.py" class="button">Log in</A>
-
-        	  </form>
-          </body>
-        </html>
+    	</head>
+    	<body>
     '''
+    print '<meta http-equiv="refresh"'
+    print 'content="0; url=../Story.html">'
 
 def CookiePage(username):
         print '<html>'
         print ' <head>'
+        print '    <meta charset="UTF-8">'
+        print '    <meta http-equiv="refresh" content="1;url=login.py">'
+        print '    <script type="text/javascript">'
+        print '        window.location.href = "profile.py?aname=' + username+'"'
+        print '    </script>'
+        print '    <title>Page Redirection</title>'
         print '		<title>'
         print '			Logged In!'
         print '		</title>'
-        print '		<style type="text/css">'
-        # in Python, use ''' triple quotes ''' to create a multi-line string
-        print '''
-                                h1 {
-                                        font-size: 100px;
-                                        font-family: arial;
-                                        color: #337AB7;
-                                }
-
-                                img {
-                                        width: 300px;
-                                }
-
-                                h2 {
-                                        color: #337AB7;
-                                        font-family: arial;
-                                }
-
-                                h3 {
-                                        font-size: 20px;
-                                        font-family: arial;
-                                        color: #337AB7;
-                        </style>
-
-                </head>
-
-        '''
+        print '         <link rel="stylesheet" type="text/css" href="../Styles/style.css"/>'
+        print ' </head>'
         print '<body>'
-        print '<h1>Hello ' + username +'</h1>'
-        print '<a href="profile.py?aname=' + username + '">Your Profile</a>'
+        print'''
+        		<header>
+        			<ul style="position:fixed;">
+        				<li><a href="Story.py">Story</a></li>
+        				<li><a name="about" href="../Story.html#about">About</a></li>
+        				<ul style="float:right;list-style-type:none;">
+        '''
+        print '					<li><a href="profile.py?aname=' + username + '">' + username + '</a></li>'
+        print'''		</ul>
+        			</ul>
+        		</header>
+        '''
+        print '<h2>Hello ' + username +'</h2>'
         print '</body></html>'
 
 import Cookie
