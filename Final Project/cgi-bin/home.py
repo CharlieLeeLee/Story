@@ -61,7 +61,32 @@ def loggedIn(aname):
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    '''
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#deleteButton").click(function() {
+    
+                var id=$("#url").val();
+
+                $.ajax({
+                    url: "deleteDoc.py",
+                    data:{
+                        url: id
+                },
+                type: "POST",
+                success: function(data) {
+                    $("#body").load("home.py #body");
+                    $("#ResultDiv").html("Story Deleted");
+                        
+                },
+                error: function() {
+                    alert("Sorry, there was a problem");
+                },
+            });
+        });
+    });
+    </script>
+        
+'''
     print '    </head>'
     #django_browserid.helpers.browserid_logout(text='Log out', next=None, link_class='browserid-logout', attrs=None)
     print '''
@@ -94,6 +119,9 @@ def loggedIn(aname):
          Start your new story</a>
     <br>
     <br>
+    <div id="ResultDiv"></div>
+    <br>
+    <div id="body">
     <table class="table">
     <thead>
       <tr>
@@ -112,11 +140,16 @@ def loggedIn(aname):
         print '     <td>'+r[0]+'</td>'
         print '     <td>'+r[3]+'</td>'
         print '    <td><a href="writing.py?id='+r[1]+'" class="button">Write this</a></td>'
+        if (r[2] == aname):
+            print '     <input type="hidden" id="url" value="'+r[1]+'">'
+            print '     <td><button class="button" id="deleteButton">Delete Story</button></td>'
+
         print ' </tr>'
         x+=1
     print '''
     </tbody>
   </table>
+  </div>
   </body>
 </html>
 '''

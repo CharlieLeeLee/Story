@@ -30,6 +30,43 @@ print '		</title>'
 print '		<link rel="stylesheet" type="text/css" href="../Styles/style.css">'
 print '    <script src="https://apis.google.com/js/api.js"></script>'
 print '    <script src="https://www.gstatic.com/realtime/realtime-client-utils.js"></script>'
+print '     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>'
+print ' <script type="text/javascript">'
+print '''
+    $(document).ready(function() {
+        $("#lookupButton").click(function() {
+            var query = $("#userName").val();
+
+            $.ajax({
+                url: "lookup.py",
+                data: {
+                    search_input: query
+                },
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    
+                    var printString="<h3>Search Results:</h3>"
+                    $("viewDiv").html("<h3>"+data.length+"</h3>");
+                    for (var i=0; i < data.length; i++) {
+                        printString+="<br><b>Name:</b>"+data[i].firstname+" "+data[i].lastname
+                        + "<br><b>Writing Talent: </b>"+data[i].writingtalent
+                        + "<br><img src='"+data[i].profile+"'/>";
+                    }
+                    $("#viewDiv").html(printString);
+                    
+      },
+      // Code to run if the request fails
+      error: function() {
+        alert( "No Matches found" );
+      },
+    });
+  });
+
+});
+</script>
+'''
+
 print ' </head>'
 
 print '<body>'
@@ -65,6 +102,14 @@ for r in c.execute('select * from accounts;'):
         print '  <h4>Talent: '+r[5]+'</h4>'
         print '  </div>'
         print '</div>'
+
+print '''
+    <p>
+        <input id="userName" type="text" size="50" placeholder="Username, First name, or Last name"/>
+        <button id="lookupButton">Search Users</button>
+        <div id="viewDiv"></div>
+    </p>
+'''
 
 print '<hr><h3 style="text-align:left;">Other Users:</h3>'
 print '<br><br>'

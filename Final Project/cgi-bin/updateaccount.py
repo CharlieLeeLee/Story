@@ -1,6 +1,6 @@
 #!"C:\Python27\python.exe"
 
-# CSC210 - log in - 11/08/2015
+# CSC210 - Update Account - 11/08/2015
 # Yumeng Liu
 
 
