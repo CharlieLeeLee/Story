@@ -64,7 +64,7 @@ def loggedIn(aname):
     <script type="text/javascript">
         $(document).ready(function(){
             $("#deleteButton").click(function() {
-    
+
                 var id=$("#url").val();
 
                 $.ajax({
@@ -76,16 +76,55 @@ def loggedIn(aname):
                 success: function(data) {
                     $("#body").load("home.py #body");
                     $("#ResultDiv").html("Story Deleted");
-                        
+
                 },
                 error: function() {
                     alert("Sorry, there was a problem");
                 },
             });
         });
+
+        $("#lookupButton").click(function() {
+
+            var title = $("#title").val();
+
+            $.ajax({
+                url: "lookupDoc.py",
+                data:{
+                    story_title: title
+            },
+            type: "GET",
+            dataType: "json",
+
+            success: function(data) {
+                $("#searchDiv").html("<table class='table'>"
+                + "<thead>"
+                + " <tr>"
+                + "   <th> # </th>"
+                + "   <th>Title</th>"
+                + "    <th>Description</th>"
+                + "    <th>Link to the Story</th>"
+                + "  </tr>"
+                + "</thead>"
+                + "<tbody>"
+                + "   <tr>"
+                + "        <td> 1 </td>"
+                + "        <td>" + data.title + "</td>"
+                + "        <td>" + data.description + "</td>"
+                + "        <td><a href=' writing.py?id=" + data.address + " 'class='button'>Write this</a></td>"
+                + "    </tr>"
+                + "</tbody>"
+                + "</table>");
+
+            },
+            error: function() {
+                alert("Sorry, there was a problem");
+            },
+        });
+    });
     });
     </script>
-        
+
 '''
     print '    </head>'
     #django_browserid.helpers.browserid_logout(text='Log out', next=None, link_class='browserid-logout', attrs=None)
@@ -113,6 +152,16 @@ def loggedIn(aname):
      <button id="auth_button" class="button" style="width:450px;height:30px;">
         Authorize your Google account to start your Writing Journey</button>
     </p>
+    <br>
+    <br>
+    <br>
+    <p>
+        <input id="title" type="text" size="30" placeholder="Title of the story"/>
+        <button class="button" id="lookupButton">Search Story</button>
+        <div id="searchDiv"></div>
+    </p>
+
+    <hr>
     <br>
     <br>
      <a href="../New.html" class="button" style="width:450px;height:30px;font-size:15px;">
